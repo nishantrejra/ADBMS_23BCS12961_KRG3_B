@@ -1,0 +1,46 @@
+
+/*Easy problem:
+Design two tables — one for storing author details and the other for book details.
+
+Ensure a foreign key relationship from the book to its respective author.
+
+Insert at least three records in each table.
+
+Perform an INNER JOIN to link each book with its author using the common author ID.
+
+Select the book title, author name, and author’s country.*/
+
+create table author(
+    a_id int primary key,
+    a_name varchar(MAX),
+    a_country varchar(MAX),
+    a_detail varchar(MAX)
+);
+
+create table book(
+    b_id int,
+    b_name varchar(MAX),
+    b_title varchar(MAX),
+    foreign key (b_id) references author(a_id)
+);
+
+insert into author (a_id, a_name, a_country, a_detail)
+values
+(1, 'VIJAY','INDIA','MATHS'),
+(2,'AMAN', 'INDIA', 'MATHS),
+(3, 'RAM', 'INDIA', 'PHYSICS');
+
+INSERT INTO book (b_id, b_name, b_title)
+VALUES
+(1, 'Mathematics Class 10', 'Algebra'),
+(2, 'Quantitative Aptitude', 'Aptitude'),
+(3, 'Concepts of Physics', 'Mechanics');
+
+-- Perform an INNER JOIN to link each book with its author using the common author ID.
+
+select b.b_title, a.a_name, a.a_country
+from author as a
+INNER JOIN
+book as b
+on 
+b.b_id = a.a_id

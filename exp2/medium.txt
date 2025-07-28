@@ -1,0 +1,48 @@
+Write an SQL query to:
+
+Return all rows from the Queries table
+
+For each row, return the corresponding NPV from Year_tbl where both ID and YEAR match
+
+If no matching NPV exists in Year_tbl, return 0 instead
+
+- (B) Part (Hard)
+-- Create Year_tbl (holds actual NPV values)
+CREATE TABLE Year_tbl (
+ID INT,
+YEAR INT,
+NPV INT
+);
+- - Create Queries table (requested values)
+CREATE TABLE Queries (
+ID INT,
+YEAR INT
+);
+- - Insert data into Year_tbl
+INSERT INTO Year_tbl (ID, YEAR, NPV)
+VALUES
+(1, 2018, 100),
+(7, 2020, 30),
+(13, 2019, 40),
+(1, 2019, 113),
+(2, 2008, 121),
+(3, 2009, 12),
+(11, 2020, 99),
+(7, 2019, 0);
+- - Insert data into Queries
+INSERT INTO Queries (ID, YEAR)
+VALUES
+(1, 2019),
+(2, 2008),
+(3, 2009),
+(7, 2018),
+(7, 2019),
+(7, 2020),
+(13, 2019);
+
+select y1.ID , y1.Year, isnull (y2.NPV, 0)
+from Queries as y1
+left outer join
+Year_tbl as y2
+on
+y1.id= y2.id and y1.YEAR= y2.YEAR
