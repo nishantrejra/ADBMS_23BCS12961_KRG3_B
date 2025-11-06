@@ -1,8 +1,7 @@
-# Write your MySQL query statement below
-SELECT id
+SELECT w1.id
 FROM Weather w1
-WHERE temperature > (
-    SELECT temperature
+WHERE w1.temperature > (
+    SELECT w2.temperature
     FROM Weather w2
-    WHERE w2.recordDate = DATE_SUB(w1.recordDate, INTERVAL 1 DAY)
+    WHERE w2.recordDate = DATEADD(DAY, -1, w1.recordDate)
 );
